@@ -2,6 +2,12 @@ var express = require('express');
 var sessions = require('express-session');
 var path = require('path');
 
+mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/storytime');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open',function(callback){});
+
 var app = express();
 var hour = 1000 * 60 * 60;
 

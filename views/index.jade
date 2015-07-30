@@ -1,0 +1,7 @@
+block content
+
+    each item in stories
+        a(href='/#{item.title}') #{item.title} 
+        p by #{item.created_by}
+        br 
+        p #{item.content}
