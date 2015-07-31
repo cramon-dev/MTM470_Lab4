@@ -3,7 +3,20 @@ html
     head
         meta(charset="utf-8")
         title #{title}
+<<<<<<< HEAD
+=======
+        link(href='/css/style.css', rel='stylesheet')
+        link(href='/css/bootstrap.min.css', rel='stylesheet')
+>>>>>>> 9d2aebade53a191b38da5339ad1f83f543ed75b7
     body
         header
+            nav.navbar.navbar-default
+                div.navbar-header
+                    a.navbar-brand(href="/") Tell a Story
+                ul.nav.navbar-nav
+                    li
+                        a(href="/") Stories
+                    li
+                        a(href="/login") Login
         block content
         footer

@@ -1,0 +1,25 @@
+body
+{
+    margin: 0 auto;
+    width: 90%;
+}
+.storyBlock
+{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 5px;
+}
+.storyBlock a
+{
+    font-size: 20px;
+}
+.storyBlock span
+{
+    padding-left: 20px;
+}
+
+nav ul
+{
+    list-style: none;
+    
+}
