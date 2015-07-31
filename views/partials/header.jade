@@ -1,0 +1,8 @@
+if user
+    p Welcome, #{user.username}!
+    a(href="http://localhost:3000/signout") Sign Out
+else
+    form(action="http://localhost:3000/signin", method="post")
+        input(type="text", placeholder="Username", name="username")
+        input(type="password", placeholder="Password", name="password")
+        input(type="submit", value="Sign In")

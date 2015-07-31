@@ -1,5 +1,7 @@
-block content
+extends layout
 
+block content
+    h1 All Stories
     each item in stories
         a(href='/#{item.title}') #{item.title} 
         p by #{item.created_by}
