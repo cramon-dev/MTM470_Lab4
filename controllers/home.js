@@ -11,6 +11,7 @@ storySchema = mongoose.Schema({
 });
 Story = mongoose.model('Story',storySchema);
 
+
 router.get('/', function(req, res, next) {
     Story.find(function(err, allStories) {
         if(err) return console.error(err);  
@@ -22,8 +23,23 @@ router.get('/', function(req, res, next) {
 //    res.send('welcome');
 });
 
+
+router.post('/edit', function(req, res, next){
+    Story.findOne({title : 'title'}, function(err,story){
+    var story = story.content;
+        console.log(req.body.adds);
+        story.content = story + '<br>' + req.body.adds;
+        story.save(function(err,cust){
+    res.render('story',{work:story, title:'Story'});
+        });
+    });
+    
+
+     
+});
 router.get('/:story', function(req, res, next){
-    Story.findOne({id : req.params.story}, function(err,story){
+    
+    Story.findOne({title : req.params.story}, function(err,story){
         res.render('story',{work:story, title:'Story'});
     });
 });
