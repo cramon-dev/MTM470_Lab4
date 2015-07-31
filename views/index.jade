@@ -1,6 +1,9 @@
 extends layout
 
 block content
-
+    h1 All Stories
     each item in stories
-        partial('storyPartial')
+        a(href='/#{item.title}') #{item.title} 
+        p by #{item.created_by}
+        br 
+        p #{item.content}
