@@ -50,6 +50,4 @@ if (app.get('env') === 'development') {
 
 app.listen(3000);
 
-app.get('/story/:id', function(req,res){
-    res.render('story');
-});
+app.use('/', require('./controllers/home.js'));
