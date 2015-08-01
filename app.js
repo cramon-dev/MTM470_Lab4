@@ -42,6 +42,8 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+
+
 // error handlers
 
 // development error handler
@@ -57,5 +59,3 @@ if (app.get('env') === 'development') {
 }
 
 app.listen(3000);
-
-app.use('/', require('./controllers/home.js'));

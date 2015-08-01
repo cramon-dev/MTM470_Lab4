@@ -13,4 +13,24 @@ router.get('/', function(req, res, next) {
 //    res.send('welcome');
 });
 
+router.post('/edit', function(req, res, next){
+    Story.findOne({title : 'title'}, function(err,story){
+        
+    var oldStory = story.content;
+        console.log(req.body.adds);
+        story.content = oldStory + '\n' + req.body.adds;
+        story.updated_at = Date.now();
+        story.save(function(err,cust){
+    res.render('story',{work:story, title:'Story'});
+        });
+    });
+     
+});
+router.get('/:story', function(req, res, next){
+    
+    Story.findOne({title : req.params.story}, function(err,story){
+        res.render('story',{work:story, title:'Story'});
+    });
+});
+
 module.exports = router;
