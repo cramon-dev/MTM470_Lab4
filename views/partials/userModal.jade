@@ -1,0 +1,14 @@
+button.userButton.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') User
+#myModal.modal.fade(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal') ×
+        h4.modal-title User Info
+      .modal-body
+        .loggedWindow
+          span Hello, #{user.username}!
+          br
+          a(href='/logout') Sign out
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close
