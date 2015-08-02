@@ -40,8 +40,9 @@ router.post('/edit/:story', function(req, res, next){
         if(!story.finished /*&& req.session.user*/){
             var oldStory = story.content;
         var t = story.title;
-
-
+        }
+        });
+});
 router.post('/edit', function(req, res, next){
     Story.findOne({title : 'title'}, function(err,story){
         
@@ -51,7 +52,7 @@ router.post('/edit', function(req, res, next){
         story.save(function(err,cust){
     
         });
-        }
+        
     res.render('story',{work:story, title:'Story'});
     });
      
