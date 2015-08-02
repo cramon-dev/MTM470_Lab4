@@ -13,11 +13,6 @@ router.post('/', function(req, res, next) {
         if(!err && Object.keys(users).length > 0) {
             if(bcrypt.compareSync(password, users[0].password)) {
                 req.session.user = { username: users[0].username };
-                res.locals.user = req.session.user;
-                
-                console.log('Inspecting session variables');
-                console.log(util.inspect(req.session.user));
-                console.log(util.inspect(res.locals.user));
             }
             
             res.redirect('/');
