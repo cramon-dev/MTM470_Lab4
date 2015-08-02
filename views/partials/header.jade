@@ -5,7 +5,7 @@ nav.navbar.navbar-default
                     li
                         a(href="/") Stories
                     li
-                        a(href="/signin") Login
+                        a(href="/login") Login
                     li
                         include ./loginModal.jade
 
@@ -13,9 +13,9 @@ nav.navbar.navbar-default
 
 if user
     p Welcome, #{user.username}!
-    a(href="http://localhost:3000/signout") Sign Out
+    a(href="http://localhost:3000/logout") Sign Out
 else
-    form(action="http://localhost:3000/signin", method="post")
+    form(action="http://localhost:3000/login", method="post")
         input(type="text", placeholder="Username", name="username")
         input(type="password", placeholder="Password", name="password")
         input(type="submit", value="Sign In")
