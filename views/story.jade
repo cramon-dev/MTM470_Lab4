@@ -2,8 +2,8 @@ block content
         h1 #{work.title}
         div
             p #{work.content}
-        form(id = 'button',  method='post', action='/edit')
+        form(id = 'button',  method='post', action='/edit/#{work.title}')
             input(name='adds')
             input(type='submit', value='Edit')
-        form(id = 'button',  method='post', action='/finish')
+        form(id = 'button',  method='post', action='/finish/#{work.title}')
             input(type='submit', value='Finish')
