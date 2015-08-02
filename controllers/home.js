@@ -2,22 +2,50 @@ var express = require('express');
 var Story = require('../models/story.js').Story;
 var router = express.Router();
 
+
 router.get('/', function(req, res, next) {
-    Story.find(function(err, allStories) {
-        if(err) return console.error(err);  
-        console.log('All stories: ' + allStories);
-        title = 'All Stories';
-        stories = allStories;
-        res.render('index',{stories: stories, title: title, user: req.session.user});   
-    });
+    title = 'All Stories';
+
+    if(req.query['search']) {
+        console.log(req.query.search);
+        stories = [];
+        Story.find(function(err, allStories) {
+            if(err) return console.error(err);  
+            console.log(allStories);
+            allStories.forEach(function(story) {
+                if(story.title.toLowerCase().indexOf(req.query.search.toLowerCase()) != -1 || story.content.toLowerCase().indexOf(req.query.search.toLowerCase()) != -1) {
+                    console.log(true)
+                    stories.push(story);
+                }
+            });
+            res.render('index',{stories: stories, title: title});  
+        });
+
+   }else{ 
+        console.log('not searching');
+        Story.find(function(err, allStories) {
+            if(err) return console.error(err);  
+            console.log(allStories);
+            stories = allStories;
+            res.render('index',{stories: stories, title: title});   
+
+        });
 //    res.send('welcome');
+    }
 });
+
 
 router.post('/edit/:story', function(req, res, next){
     Story.findOne({title : req.params.story}, function(err,story){
         if(!story.finished /*&& req.session.user*/){
             var oldStory = story.content;
         var t = story.title;
+
+
+router.post('/edit', function(req, res, next){
+    Story.findOne({title : 'title'}, function(err,story){
+        
+    var oldStory = story.content;
         story.content = oldStory + '\n' + req.body.adds;
         story.updated_at = Date.now();
         story.save(function(err,cust){

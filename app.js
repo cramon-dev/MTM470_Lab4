@@ -30,10 +30,10 @@ app.use(sessions({
     saveUninitialized: true
 }));
 
-app.use('/', require('./controllers/home.js'));
 app.use('/register', require('./controllers/registration.js'));
 app.use('/signin', require('./controllers/signin.js'));
 app.use('/signout', require('./controllers/signout.js'));
+app.use('/', require('./controllers/home.js'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

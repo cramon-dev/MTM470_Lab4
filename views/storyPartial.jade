@@ -1,8 +1,7 @@
 section.storyBlock
     h4
-        a(href='') Story name
-      p This is a story synopsis, a synopsis of the story    
-      .authors
-        Author 1, 
+        a(href='/#{item.title}') #{item.title}
+      p #{item.content}
+      p #{item.created_by}, 
         br
-        Author 2
+      p #{item.last_update_by}
