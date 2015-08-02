@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
                     stories.push(story);
                 }
             });
-            res.render('index',{stories: stories, title: title});  
+            res.render('index',{stories: stories, title: title, user: req.session.user});  
         });
 
    }else{ 
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
             if(err) return console.error(err);  
             console.log(allStories);
             stories = allStories;
-            res.render('index',{stories: stories, title: title});   
+            res.render('index',{stories: stories, title: title, user: req.session.user});   
 
         });
 //    res.send('welcome');
