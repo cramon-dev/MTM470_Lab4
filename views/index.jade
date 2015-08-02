@@ -1,9 +1,11 @@
 extends layout
 
 block content
+    p Search
+    form(method="get", action="/")
+        input(type="text", name="search")
+        input(type="submit" value="Search")
+    br
     h1 All Stories
     each item in stories
-        a(href='/#{item.title}') #{item.title} 
-        p by #{item.created_by}
-        br 
-        p #{item.content}
+        include storyPartial

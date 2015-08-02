@@ -2,16 +2,38 @@ var express = require('express');
 var Story = require('../models/story.js').Story;
 var router = express.Router();
 
+
 router.get('/', function(req, res, next) {
-    Story.find(function(err, allStories) {
-        if(err) return console.error(err);  
-        console.log('All stories: ' + allStories);
-        title = 'All Stories';
-        stories = allStories;
-        res.render('index',{stories: stories, title: title, user: req.session.user});   
-    });
+    title = 'All Stories';
+
+    if(req.query['search']) {
+        console.log(req.query.search);
+        stories = [];
+        Story.find(function(err, allStories) {
+            if(err) return console.error(err);  
+            console.log(allStories);
+            allStories.forEach(function(story) {
+                if(story.title.toLowerCase().indexOf(req.query.search.toLowerCase()) != -1 || story.content.toLowerCase().indexOf(req.query.search.toLowerCase()) != -1) {
+                    console.log(true)
+                    stories.push(story);
+                }
+            });
+            res.render('index',{stories: stories, title: title});  
+        });
+
+   }else{ 
+        console.log('not searching');
+        Story.find(function(err, allStories) {
+            if(err) return console.error(err);  
+            console.log(allStories);
+            stories = allStories;
+            res.render('index',{stories: stories, title: title});   
+
+        });
 //    res.send('welcome');
+    }
 });
+
 
 router.post('/edit', function(req, res, next){
     Story.findOne({title : 'title'}, function(err,story){
