@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
                     stories.push(story);
                 }
             });
-            res.render('index',{stories: stories, title: title});  
+            res.render('index',{stories: stories, title: title, user:req.session.user});  
         });
 
    }else{ 
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
             if(err) return console.error(err);  
             console.log(allStories);
             stories = allStories;
-            res.render('index',{stories: stories, title: title});   
+            res.render('index',{stories: stories, title: title, user:req.session.user});   
 
         });
 //    res.send('welcome');
@@ -36,34 +36,29 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/edit/:story', function(req, res, next){
+    console.log(req.params.story);
     Story.findOne({title : req.params.story}, function(err,story){
         if(!story.finished /*&& req.session.user*/){
             var oldStory = story.content;
-        var t = story.title;
-        }
-        });
-});
-router.post('/edit', function(req, res, next){
-    Story.findOne({title : 'title'}, function(err,story){
-        
-    var oldStory = story.content;
         story.content = oldStory + '\n' + req.body.adds;
         story.updated_at = Date.now();
         story.save(function(err,cust){
     
         });
         
-    res.render('story',{work:story, title:'Story'});
-    });
-     
+    res.redirect('/');
+        }
+        res.redirect('/');
+        });
 });
+
 
 router.post('/finish/:story', function(req, res, next){
     Story.findOne({title : req.params.story}, function(err,story){
         //if(req.session.user){
             story.finished = true;
         story.save(function(err,cust){
-            res.render('story',{work:story, title:'Story'});
+            res.redirect('/');
         });
         //}
         
@@ -86,12 +81,18 @@ router.post('/create', function(req,res,next){
     var story = new Story({title: req.body.title,
     created_by: 'User',
     content: req.body.content,
-    created_at: Date.now,
-    updated_at: Date.now,
+    created_at: Date.now(),
+    updated_at: Date.now(),
     last_update_by: 'User',
     finished: false});
     story.save(function(err,cust){
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        }else{
             res.render('story',{work:story, title:story.title});
+        }
+            
         });
 });
 
