@@ -5,7 +5,7 @@ block content
     div
         p #{work.content}
     if user
-        form(id = 'button',  method='post', action='/edit/#{work.title}')
+        form(id = 'storyForm',  method='post', action='/edit/#{work.title}')
             textarea(name='adds', id='content', rows="15", cols="100",form="storyForm")
             br
             input(type='submit', value='Edit')
