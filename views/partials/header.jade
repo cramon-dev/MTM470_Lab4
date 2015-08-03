@@ -1,7 +1,12 @@
 nav.navbar.navbar-default
-                div.navbar-header
+                div.navbar-header.col-md-2
                     a.navbar-brand(href="/") Tell a Story
-                ul.nav.navbar-nav
+                div.col-md-5.pull-left
+                    form(method="get", action="/").navbar-form
+                                input(type="text", name="search")
+                                button.btn.btn-default(type='submit')
+                                    i.glyphicon.glyphicon-search
+                ul.nav.navbar-nav.col-md-4
                     li
                         a(href="/") Stories
                     if user
