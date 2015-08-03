@@ -69,10 +69,9 @@ router.post('/edit/:story', function(req, res, next){
     
         });
         
-    res.redirect('/');
         }
         res.redirect('/');
-        });
+    });
 });
 
 
