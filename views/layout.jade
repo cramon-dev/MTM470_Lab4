@@ -3,8 +3,8 @@ html
     head
         meta(charset="utf-8")
         title= title
-        link(href='/css/style.css', rel='stylesheet')
         link(href='/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/css/style.css', rel='stylesheet')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='js/bootstrap.min.js')
     body
@@ -12,5 +12,6 @@ html
             include ./partials/header.jade
         if message
             p #{message}
-        block content
+        main
+            block content
         footer

@@ -1,8 +1,12 @@
+extends layout
+
 block content
         h1 Create Story
-        form(id = 'button',  method='post', action='/create')
+        form(id = 'storyForm',  method='post', action='/create')
             label(for='title') Title
             input(type='text', name='title', id='title')
+            br
             label(for='content') Story Beginning
-            input(type='text', name='content', id='content')
+            textarea(type='text', name='content', id='content', rows="15" cols="100" form="storyForm")
+            br
             input(type='submit', value='Create')

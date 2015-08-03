@@ -1,4 +1,11 @@
-form(action="http://localhost:3000/register", method="post")
-    input(type="text", name="username")
-    input(type="password", name="password")
-    input(type="submit", value="Register")
+extends layout
+
+block content    
+    form(action="http://localhost:3000/register", method="post").registerForm
+        label(for="username") Username
+        input(type="text", name="username", placeholder='Username', required='required').form-control
+        br
+        label(for="password") Password
+        input(type="password", name="password", placeholder='Password', required='required').form-control
+        br
+        input(type="submit", value="Register").btn.btn-default.btn-primary

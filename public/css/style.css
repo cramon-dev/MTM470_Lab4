@@ -13,13 +13,73 @@ body
 {
     font-size: 20px;
 }
-.storyBlock span
+.storyBlock p
 {
-    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
-
 nav ul
 {
     list-style: none;
     
+}
+.navbar .nav
+{
+    float:right;
+}
+.modal-dialog
+{
+    width: 400px;
+}
+.modal-content
+{
+    
+}
+.modal-body
+{
+    text-align: center;
+    
+}
+.modal-body form
+{
+    width: 75%;
+    display: inline-block;
+}
+.modal-body button
+{
+    width:50%;
+    display: inline;
+}
+.modal-footer a
+{
+    float: left;
+    margin-top: 5px;
+}
+.modal-open
+{
+    padding: 0 !important;
+}
+main
+{
+    padding-left: 30px;   
+}
+.registerForm
+{
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+.storyBlock
+{
+    padding: 10px;
+    min-height: 165px;
+}
+.summary
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: inherit-10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

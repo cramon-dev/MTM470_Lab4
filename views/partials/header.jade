@@ -4,6 +4,9 @@ nav.navbar.navbar-default
                 ul.nav.navbar-nav
                     li
                         a(href="/") Stories
+                    if user
+                        li
+                           a(href="/createStory") Create a Story 
                     li
                         if user
                             include ./userModal.jade

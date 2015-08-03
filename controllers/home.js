@@ -87,6 +87,7 @@ router.post('/finish/:story', function(req, res, next){
         
     });
 });
+
 router.get('/createStory', function(req,res,next){
     console.log(req.session.user);
     //if(req.session.user){
@@ -100,13 +101,14 @@ router.get('/story/:story', function(req, res, next){
         res.render('story',{work:story, title:'Story', user: req.session.user});
     });
 });
+
 router.post('/create', function(req,res,next){
     var story = new Story({title: req.body.title,
-    created_by: 'User',
+    created_by: req.session.user.username,
     content: req.body.content,
     created_at: Date.now(),
     updated_at: Date.now(),
-    last_update_by: 'User',
+    last_update_by: req.session.user.username,
     finished: false});
     story.save(function(err,cust){
         if(err){

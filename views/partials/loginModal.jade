@@ -1,4 +1,4 @@
-button.userButton.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') User
+button.userButton.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Log In
 #myModal.modal.fade(role='dialog')
   .modal-dialog
     .modal-content
@@ -12,4 +12,5 @@ button.userButton.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-t
             input.form-control(type='password', name='password', placeholder='Password', required='required')
             button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
       .modal-footer
+        a(href='/register') Create Account
         button.btn.btn-default(type='button', data-dismiss='modal') Close
