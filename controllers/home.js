@@ -91,7 +91,7 @@ router.post('/finish/:story', function(req, res, next){
 router.get('/createStory', function(req,res,next){
     console.log(req.session.user);
     //if(req.session.user){
-        res.render('create');
+        res.render('create', {user: req.session.user});
     //}
     //res.redirect('/');
     
