@@ -3,6 +3,26 @@ var Story = require('../models/story.js').Story;
 var router = express.Router();
 
 
+//Catch all routes and only allow user to create, edit, and finalize stories if they're signed in
+router.get('/:pageCalled', function(req, res, next) {
+    if(req.params.pageCalled.indexOf('favicon.ico') > -1) {
+        console.log('favicon called, ignore this pos request');
+    }
+    else if(req.params.pageCalled.indexOf('/') > -1 || req.params.pageCalled.indexOf('/story/\w+') > -1) {
+        console.log('called root or story');
+        next();
+    }
+    else {
+        if(req.session.user) {
+            next();
+        }
+        else {
+            req.session.message = 'You need to be logged in to do that';
+            res.redirect('/');
+        }
+    }
+});
+
 router.get('/', function(req, res, next) {
     title = 'All Stories';
 
@@ -18,7 +38,9 @@ router.get('/', function(req, res, next) {
                     stories.push(story);
                 }
             });
-            res.render('index',{stories: stories, title: title, user: req.session.user});  
+            var message = req.session.message;
+            req.session.message = null;
+            res.render('index',{stories: stories, title: title, user: req.session.user, message: message});  
         });
 
    }else{ 
@@ -27,8 +49,9 @@ router.get('/', function(req, res, next) {
             if(err) return console.error(err);  
             console.log(allStories);
             stories = allStories;
-            res.render('index',{stories: stories, title: title, user: req.session.user});   
-
+            var message = req.session.message;
+            req.session.message = null;
+            res.render('index',{stories: stories, title: title, user: req.session.user,  message: message});   
         });
 //    res.send('welcome');
     }
@@ -72,9 +95,9 @@ router.get('/createStory', function(req,res,next){
     //res.redirect('/');
     
 });
-router.get('/:story', function(req, res, next){
+router.get('/story/:story', function(req, res, next){
     Story.findOne({title : req.params.story}, function(err,story){
-        res.render('story',{work:story, title:'Story'});
+        res.render('story',{work:story, title:'Story', user: req.session.user});
     });
 });
 router.post('/create', function(req,res,next){
@@ -90,11 +113,30 @@ router.post('/create', function(req,res,next){
             console.log(err);
             res.redirect('/');
         }else{
-            res.render('story',{work:story, title:story.title});
+            res.render('story',{work:story, title:story.title, user: req.session.user});
         }
             
         });
 });
 
+
+//Old catch all route
+//// \/(\w+\/?)
+//// (\w+(\/)?)+
+//router.all(/(?!\s)(\w+(\/)?)+/, function(req, res, next) {
+//    console.log('all route');
+//    if(req.session.user) {
+//        console.log('user is signed in');
+//    }
+//    else {
+//        if(req.url.indexOf('localhost:3000') > -1 || req.url.indexOf('localhost:3000/') > -1) {
+//            console.log('requesting root');
+//            next();
+//        }
+//        console.log('user is not signed in');
+////        res.redirect('/');
+//    }
+//    console.log('after');
+//});
 
 module.exports = router;

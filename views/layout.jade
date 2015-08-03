@@ -10,5 +10,7 @@ html
     body
         header
             include ./partials/header.jade
+        if message
+            p #{message}
         block content
         footer

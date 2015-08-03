@@ -1,7 +1,8 @@
 block content
-        h1 #{work.title}
-        div
-            p #{work.content}
+    h1 #{work.title}
+    div
+        p #{work.content}
+    if user
         form(id = 'button',  method='post', action='/edit/#{work.title}')
             input(name='adds')
             input(type='submit', value='Edit')
